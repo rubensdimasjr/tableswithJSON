@@ -181,7 +181,14 @@
 
                                 select.appendChild(opt);
                             }
-
+                            
+                            // mudando nome dos campos
+                            select.children[1].textContent = 'ID Usuário';
+                            select.children[2].textContent = 'ID';
+                            select.children[3].textContent = 'Título';
+                            select.children[4].textContent = 'Conteúdo';
+                            
+                            // criando tabela
                             var query = document.getElementById("query");
 
                             document.getElementById("filter").onclick = function () {
