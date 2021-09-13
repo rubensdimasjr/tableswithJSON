@@ -20,30 +20,32 @@
     <!--MENU-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">Rubens JSON Tables</a>
-          <div class="collapse navbar-collapse" id="navbarToggler">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="https://github.com/rubensdimasjr/tableswithJSON">GitHub</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Tabelas
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="posts.html">Posts</a></li>
-                  <li><a class="dropdown-item" href="albums.html">Albums</a></li>
-                  <li><a class="dropdown-item" href="todos.html">To Do List</a></li>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
+                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Rubens JSON Tables</a>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/rubensdimasjr">GitHub</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Tabelas
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="posts.html">Posts</a></li>
+                            <li><a class="dropdown-item" href="albums.html">Albums</a></li>
+                            <li><a class="dropdown-item" href="todos.html">To Do List</a></li>
+                        </ul>
+                    </li>
                 </ul>
-              </li>
-            </ul>
-          </div>
+            </div>
         </div>
     </nav>
     <!--FIM MENU-->
@@ -98,15 +100,7 @@
             <div class="tab-pane fade" id="nav-filtrar" role="tabpanel" aria-labelledby="nav-filtrar-tab">
                 <div class="my-4">
                     <div class="row">
-                        <div class="alert alert-danger d-flex align-items-center" role="alert">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
-                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                              </svg>
-                            <div>
-                                A opção 'completed' não está funcionando como deveria. Desculpe \o;
-                            </div>
-                          </div>
-                        <div class="col-6 col-lg-4">
+                        <div class="col-lg-4 col-md-6 col-sm-10">
                             <div class="input-group mb-3">
                                 <label class="input-group-text" for="inputGroupSelect01">Opções</label>
                                 <select class="form-select" id="filters">
@@ -114,7 +108,18 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-4">
+                        <div class="col-lg-4 col-md-6 col-sm-10 d-none" id="filter-completed">
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupSelect02">Opções</label>
+                                <select class="form-select" id="select-completed">
+                                    <option value="1" selected>Feitas</option>
+                                    <option value="0" selected>Não feitas</option>
+                                </select>
+                                <button class="btn btn-outline-primary" type="button"
+                                    id="btn-completed">Filtrar</button>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6" id="btn-filtrar">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" id="query" placeholder="String Filtro"
                                     aria-label="String Filtro" aria-describedby="button-filter">
@@ -158,7 +163,6 @@
         <!--FIM NAV-TABS-->
     </div>
 
-
     <script>
         fetch('https://jsonplaceholder.typicode.com/todos?userId=1').then(
             res => {
@@ -173,17 +177,17 @@
                                 temp += "<tr>";
                                 temp += "<td>" + element.id + "</td>";
                                 temp += "<td>" + element.title + "</td>";
-                                if(element.completed == true){
-                                temp += "<td><input type='checkbox' checked></td>"
-                                }else{
-                                temp += "<td><input type='checkbox' unchecked></td>" 
+                                if (element.completed == true) {
+                                    temp += "<td><input type='checkbox' checked></td>"
+                                } else {
+                                    temp += "<td><input type='checkbox' unchecked></td>"
                                 }
                                 temp += "<tr>";
                             });
 
                             document.getElementById("dados").innerHTML = temp;
 
-                            // Criar filtro
+                            // Criando filtro
                             var filters = Object.keys(dados[0]);
                             var select = document.getElementById("filters");
 
@@ -195,6 +199,13 @@
                                 select.appendChild(opt);
                             }
 
+                            // mudando nome dos campos
+                            select.children[1].textContent = 'ID Usuário';
+                            select.children[2].textContent = 'ID';
+                            select.children[3].textContent = 'Título';
+                            select.children[4].textContent = 'Atividades';
+
+                            // colocando na tabela
                             var query = document.getElementById("query");
 
                             document.getElementById("filter").onclick = function () {
@@ -214,12 +225,59 @@
                                     html += "<tr>";
                                     html += "<td>" + result[i].id + "</td>"
                                     html += "<td>" + result[i].title + "</td>"
-                                    html += "<td>" + result[i].completed + "</td>"
+                                    if (result[i].completed == 1) {
+                                        html += "<td><input type='checkbox' checked></td>"
+                                    } else {
+                                        html += "<td><input type='checkbox' unchecked></td>"
+                                    }
                                     html += "</tr>";
                                 }
 
                                 $("#tabela").empty().append(html + "</table>");
                             };
+
+                            // Desativando o filtro
+                            $('#filters').change(function () {
+                                var option = $("#filters option:selected").val();
+                                if (option == 'completed') {
+                                    $('#btn-filtrar').addClass('d-none');
+                                    $('#filter-completed').removeClass('d-none');
+
+                                    // criando tabela das atividades
+                                    var query = document.getElementById("select-completed");
+
+                                    document.getElementById("btn-completed").onclick = function () {
+                                        var result = dados.filter(function (item) {
+                                            return item[select.value] == query.value;
+                                        });
+                                        var html = "<table class='table my-2'>";
+                                        html += "<thead>";
+                                        html += "<tr>";
+                                        html += "<th>#</th>"
+                                        html += "<th>Título</th>"
+                                        html += "<th>Check</th>"
+                                        html += "</tr>";
+                                        html += "</thead>";
+
+                                        for (var i = 0; i < result.length; i++) {
+                                            html += "<tr>";
+                                            html += "<td>" + result[i].id + "</td>"
+                                            html += "<td>" + result[i].title + "</td>"
+                                            if (result[i].completed == 1) {
+                                                html += "<td><input type='checkbox' checked></td>"
+                                            } else {
+                                                html += "<td><input type='checkbox' unchecked></td>"
+                                            }
+                                            html += "</tr>";
+                                        }
+
+                                        $("#tabela").empty().append(html + "</table>");
+                                    };
+                                } else {
+                                    $('#btn-filtrar').removeClass('d-none');
+                                    $('#filter-completed').addClass('d-none');
+                                }
+                            });
                         }
                     }
                 )
